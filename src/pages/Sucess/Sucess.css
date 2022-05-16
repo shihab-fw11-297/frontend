@@ -1,0 +1,36 @@
+.homeContainer{
+    margin-top: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+  
+  .homeTitle{
+    width: 1024px;
+    font-size: 20px;
+  }
+
+ 
+  .sucessImg{
+    width: 350px;
+    height: 350px;
+}
+
+@media screen and (max-width: 767px) {
+    .homeContainer{
+      margin-top: 200px;
+      padding:0px 20px;
+    }
+  
+    
+    .homeTitle{
+      max-width: 100%;
+    }
+
+    .sucessImg{
+        width: 250px;
+        height: 250px;
+    }
+  }
+  

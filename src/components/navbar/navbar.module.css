@@ -1,0 +1,128 @@
+.navbar {
+  height: 60px;
+  background-color: #003580;
+  display: flex;
+  justify-content: center;
+}
+
+.navContainer {
+  padding-top: 20px;
+  width: 100%;
+  max-width: 1024px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo {
+  margin-left: 25px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.navButton {
+  margin-left: 20px;
+  font-weight: 600;
+  border: none;
+  font-size: 15px;
+  padding: 5px 20px;
+  cursor: pointer;
+  color: #2168ca;
+}
+
+.firstButton {
+  margin-left: 20px;
+  font-weight: 600;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+  background-color: #003580;
+  border: 1px solid white;
+}
+
+.navButtons{
+  display: none;
+}
+
+.names{
+  font-weight: 600;
+}
+.names:hover{
+  cursor: pointer;
+}
+
+.logOuts{
+  margin-top: 2px;
+  z-index: 1;
+}
+
+.logOuts:hover{
+  cursor: pointer;
+}
+
+@media screen and (max-width: 767px) {
+  .navbar {
+    height: 60px;
+    background-color: #003580;
+    display: flex;
+    justify-content: center;
+  }
+
+  .navContainer {
+    padding: 20px;
+    width: 100%;
+    max-width: 767px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+  }
+  .navItems{
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .logo {
+    margin-left: 10px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .navButtons{
+    display: block;
+    background-color: #003580;
+    
+  }
+
+  .navButton{
+    display: none;
+  }
+
+  .headerIcons2{
+    width: 30px;
+    height: 30px;
+    color: white;
+  }
+
+  .firstButton{
+    display: none;
+  }
+
+  
+.names:hover{
+  cursor: pointer;
+}
+
+.logOuts{
+  margin-top: 2px;
+  z-index: 1;
+}
+
+.logOuts:hover{
+  cursor: pointer;
+}
+}
