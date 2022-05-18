@@ -1,20 +1,22 @@
 import "./list.css";
 import Navbar from "../../components/navbar/Navbar";
 import Header from "../../components/header/Header";
-import { useLocation } from "react-router-dom";
+//import { useLocation } from "react-router-dom";
 import { useState } from "react";
 import { format } from "date-fns";
 import { DateRange } from "react-date-range";
 import SearchItem from "../../components/searchItem/SearchItem";
 import useFetch from "../../hooks/useFetch";
 
+import {useSelector} from "react-redux";
 
 const List = () => {
-  const location = useLocation();
-  const [destination, setDestination] = useState(location.state.destination);
-  const [date, setDate] = useState(location.state.date);
+  const {search} = useSelector((store) => store);
+ // const location = useLocation();
+  const [destination, setDestination] = useState(search.search?.destination);
+  const [date, setDate] = useState(search.search?.date);
   const [openDate, setOpenDate] = useState(false);
-  const [options, setOptions] = useState(location.state.options);
+  const [options, setOptions] = useState(search.search?.options);
   const [min, setMin] = useState(undefined);
   const [max, setMax] = useState(undefined);
   const [rating, setRating] = useState(0);
@@ -29,6 +31,7 @@ const List = () => {
     let data = str[0].toUpperCase() + str.slice(1);
     setDestination(data);
   }
+  
 
   return (
     <div>
@@ -45,9 +48,9 @@ const List = () => {
             <div className="lsItem">
               <label>Check-in Date</label>
               <span onClick={() => setOpenDate(!openDate)}>{`${format(
-                date[0].startDate,
+                date[0]?.startDate,
                 "MM/dd/yyyy"
-              )} to ${format(date[0].endDate, "MM/dd/yyyy")}`}</span>
+              )} to ${format(date[0]?.endDate, "MM/dd/yyyy")}`}</span>
               {openDate && (
                 <DateRange
                   onChange={(item) => setDate([item.selection])}

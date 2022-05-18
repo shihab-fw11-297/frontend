@@ -5,15 +5,22 @@ import {
     faCircleUser,
     faBars
 } from "@fortawesome/free-solid-svg-icons";
-import { useContext } from "react";
-import { AuthContext } from "../../context/AuthContext";
+// import { useContext } from "react";
+// import { AuthContext } from "../../context/AuthContext";
 import { useState } from "react";
-const Navbar = () => {
-    const { user } = useContext(AuthContext);
-    const [open, setOpen] = useState(false);
+import {useSelector} from "react-redux";
+import { useNavigate } from "react-router-dom";
 
+const Navbar = () => {
+   // const { user } = useContext(AuthContext);
+   const navigate = useNavigate()
+    const [open, setOpen] = useState(false);
+    const auth = useSelector((store) => store.auth);
+
+    
     const logOut = () => {
         localStorage.removeItem('user')
+        navigate("/")
         window.location.reload();
     }
 
@@ -28,8 +35,8 @@ const Navbar = () => {
                         </svg>
                     </Link>
                 </span>
-                {user ? <div classname={styles.names} >
-                    <b onClick={() => setOpen(!open)}>Welcome {user.email.substring(0, user.email.lastIndexOf("@"))}</b>
+                { auth.user?.email ? <div classname={styles.names} >
+                    <b onClick={() => setOpen(!open)}>Welcome {auth.user?.email.substring(0, auth.user?.email.lastIndexOf("@"))}</b>
                     {open &&
 
                        
@@ -40,8 +47,6 @@ const Navbar = () => {
                     }
                 </div>
                     : (
-
-
                         <div className={styles.navItems}>
                             <button className={styles.firstButton}>List Your Property</button>
                             <button className={styles.navButton}><Link to="/Signup">Register</Link></button>
@@ -49,7 +54,7 @@ const Navbar = () => {
                             <button className={styles.navButtons} ><FontAwesomeIcon icon={faCircleUser} className={styles.headerIcons2} /></button>
                             <button className={styles.navButtons} ><Link to="/">  <FontAwesomeIcon icon={faBars} className={styles.headerIcons2} /> </Link></button>
                         </div>
-                    )}
+                    )} 
             </div>
         </div>
     )

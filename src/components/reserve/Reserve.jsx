@@ -3,15 +3,17 @@ import { faCircleXmark } from "@fortawesome/free-solid-svg-icons";
 
 import "./reserve.css";
 import useFetch from "../../hooks/useFetch";
-import { useContext, useState } from "react";
-import { SearchContext } from "../../context/SearchContext";
+import { useState } from "react";
+//import { SearchContext } from "../../context/SearchContext";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import {useSelector} from "react-redux";
 
 const Reserve = ({ setOpen, hotelId }) => {
+  const {search} = useSelector((store) => store);
   const [selectedRooms, setSelectedRooms] = useState([]);
   const { data, loading} = useFetch(`https://booking-clones.herokuapp.com/api/hotels/room/${hotelId}`);
-  const { date } = useContext(SearchContext);
+ // const { date } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
     const start = new Date(startDate);
@@ -29,7 +31,7 @@ const Reserve = ({ setOpen, hotelId }) => {
     return dates;
   };
 
-  const alldates = getDatesInRange(date[0].startDate, date[0].endDate);
+  const alldates = getDatesInRange(search.search.date[0].startDate, search.search.date[0].endDate);
 
   const isAvailable = (roomNumber) => {
     const isFound = roomNumber.unavailableDates.some((date) =>

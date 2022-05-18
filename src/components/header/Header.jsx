@@ -10,15 +10,17 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
-import { useState,useContext } from "react";
+import { useState } from "react";
+import {useDispatch} from "react-redux";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { format } from "date-fns";
 import { useNavigate } from "react-router-dom";
-import { SearchContext } from "../../context/SearchContext";
+import {newSearch} from '../../Reduxs/actions'
 
 const Header = ({ type }) => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
   const [destination, setDestination] = useState("");
   const [openDate, setOpenDate] = useState(false);
   const [date, setDate] = useState([
@@ -52,11 +54,10 @@ const Header = ({ type }) => {
     setDestination(data);
   }
 
-  const { dispatch } = useContext(SearchContext);
-
   const handleSearch = () => {
-    dispatch({ type: "NEW_SEARCH", payload: { destination, date, options } });
-    navigate("/hotels", { state: { destination, date, options } });
+    const payload= { destination, date, options }
+    dispatch(newSearch(payload));
+    navigate("/hotels");
   };
   return (
     <div className="header">

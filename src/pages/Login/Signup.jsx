@@ -1,55 +1,46 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import styles from "./Login.module.css";
 import GoogleLogin from "react-google-login";
-import { AuthContext } from "../../context/AuthContext";
+//import { AuthContext } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { loginStart, loginSuccess, loginFailure } from '../../Reduxs/actions';
 
 const Signup = () => {
   const navigate = useNavigate()
+  const dispatch = useDispatch();
   const [showPassword, setShowPassword] = useState(false);
+  const [signuperror, setSignUpError] = useState(false)
   const [credentials, setCredentials] = useState({
     email: undefined,
     password: undefined,
   });
-  const { loading, error, dispatch } = useContext(AuthContext);
+  //  const { loading, error, dispatch } = useContext(AuthContext);
 
   const handleChange = (e) => {
     let str = e.target.value;
 
     if (str.includes("@") && str.includes(".")) {
-        setShowPassword(true);
+      setShowPassword(true);
     }
     setCredentials((prev) => ({ ...prev, [e.target.id]: str }));
-};
+  };
 
-const handleClick = async (e) => {
-  e.preventDefault();
-  dispatch({ type: "LOGIN_START" });
-
-  try {
-      const res = await axios.post("https://booking-clones.herokuapp.com/api/auth/register", credentials);
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-       navigate("/")
-    } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
-    }
-
-}
-
-const googleSuccess = (res) => {
-  try {
-      dispatch({ type: 'AUTH', payload:  res.data });
-      dispatch({ type: "LOGIN_SUCCESS", payload: res.data });
-      navigate("/")
-  } catch (err) {
-      dispatch({ type: "LOGIN_FAILURE", payload: err.response.data });
+  const handleClick = async (e) => {
+    e.preventDefault();
+    dispatch(loginStart());
+    await axios.post("https://booking-clones.herokuapp.com/api/auth/register", credentials)
+      .then(res => {
+        setSignUpError(false)
+        dispatch(loginSuccess(res.data));
+        navigate("/")
+      }).catch(function (err) {
+        setSignUpError(true)
+        dispatch(loginFailure(err));
+      })
   }
-
-};
-
-const googleError = (err) => dispatch({ type: "LOGIN_FAILURE", payload: err });
 
   return (
     <div className={styles.login}>
@@ -81,41 +72,41 @@ const googleError = (err) => dispatch({ type: "LOGIN_FAILURE", payload: err });
       </div>
 
       <div className={styles.form}>
-                <h2 className={styles.formheading}>Sign in or create an account</h2>
-                <form action="">
-                    <label htmlFor="email">Email address</label>
-                    <input
-                        onChange={handleChange}
-                        className={styles.input}
-                        type="email"
-                        name="email"
-                        id="email"
-                        autoFocus
-                    />
-                    {showPassword ? (
-                        <div>
-                            <label htmlFor="password1">Password</label>
-                            <input
-                                className={styles.input}
-                                type="password"
-                                name="password"
-                                id="password"
-                                placeholder="password"
-                                onChange={handleChange}
-                            />
-                        </div>
-                    ) : ""}
-                    <input
-                        className={styles.button}
-                        type="submit"
-                        defaultValue="Create account"
-                        disabled={loading} onClick={handleClick}
-                    />
-                     {error && <span>{error.message}</span>}
-                </form>
+        <h2 className={styles.formheading}>Sign in or create an account</h2>
+        <form action="">
+          <label htmlFor="email">Email address</label>
+          <input
+            onChange={handleChange}
+            className={styles.input}
+            type="email"
+            name="email"
+            id="email"
+            autoFocus
+          />
+          {showPassword ? (
+            <div>
+              <label htmlFor="password1">Password</label>
+              <input
+                className={styles.input}
+                type="password"
+                name="password"
+                id="password"
+                placeholder="password"
+                onChange={handleChange}
+              />
             </div>
+          ) : ""}
+          <input
+            className={styles.button}
+            type="submit"
+            defaultValue="Create account"
+            onClick={handleClick}
+          />
+          {signuperror ? <span>Invalid email or password</span> : ""}
+        </form>
+      </div>
 
-            <div className={styles.line2}><Link to="/login"><b>Click here for Login!</b></Link></div>
+      <div className={styles.line2}><Link to="/login"><b>Click here for Login!</b></Link></div>
       <div className={styles.line}>
         <hr className={styles.hr} />
         <p className={styles.p}>or use one of these options</p>
@@ -145,8 +136,6 @@ const googleError = (err) => dispatch({ type: "LOGIN_FAILURE", payload: err });
             </button>
           )}
           buttonText="Login"
-          onSuccess={googleSuccess}
-          onFailure={googleError}
           cookiePolicy="single_host_origin"
         />
         <button className={styles.google}>
@@ -156,7 +145,7 @@ const googleError = (err) => dispatch({ type: "LOGIN_FAILURE", payload: err });
           />
         </button>
       </div>
-     
+
       <div className={styles.line1}>
         <hr />
         <p className={styles.p1}>
