@@ -13,4 +13,4 @@ const middlewere1 = (store) => (next) => (action) =>{
 };
 
 export const store = createStore(rootReducer ,compose(applyMiddleware(middlewere1),
-window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()));
+window.__REDUX_DEVTOOLS_EXTENSION__ ? window.__REDUX_DEVTOOLS_EXTENSION__() : f => f ));

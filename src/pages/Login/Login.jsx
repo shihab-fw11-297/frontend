@@ -35,7 +35,7 @@ const Login = () => {
         e.preventDefault();
         dispatch(loginStart());
 
-        await axios.post("https://booking-clones.herokuapp.com/api/auth/login", credentials)
+        await axios.post("https://bookings.onrender.com/api/auth/login", credentials)
             .then(res => {
                 setSignUpError(false)
                 dispatch(loginSuccess(res.data));

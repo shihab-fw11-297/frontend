@@ -21,7 +21,7 @@ import {useSelector} from "react-redux";
 const Hotel = () => {
   const location = useLocation();
   const id = location.pathname.split("/")[2];
-  const { data, loading } = useFetch(`https://booking-clones.herokuapp.com/api/hotels/find/${id}`);
+  const { data, loading } = useFetch(`https://bookings.onrender.com/api/hotels/find/${id}`);
   //const { user } = useContext(AuthContext);
   const navigate = useNavigate();
 

@@ -46,12 +46,21 @@
 
   @media screen and (max-width: 767px) {
 
+    .mail{
+      width: auto;
+      padding: 5px;
+    }
+
+    .mailInputContainer{
+      padding: 0;
+      margin: 0;
+    }
     .mailInputContainer>input{
-      width: 200px;
+      width: 150px;
       height: 30px;
       padding: 10px;
       border: none;
-      margin-right: 10px;
+      margin-right: 5px;
       border-radius: 5px;
     }
 

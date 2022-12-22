@@ -12,7 +12,7 @@ import {useSelector} from "react-redux";
 const Reserve = ({ setOpen, hotelId }) => {
   const {search} = useSelector((store) => store);
   const [selectedRooms, setSelectedRooms] = useState([]);
-  const { data, loading} = useFetch(`https://booking-clones.herokuapp.com/api/hotels/room/${hotelId}`);
+  const { data, loading} = useFetch(`https://bookings.onrender.com/api/hotels/room/${hotelId}`);
  // const { date } = useContext(SearchContext);
 
   const getDatesInRange = (startDate, endDate) => {
@@ -57,7 +57,7 @@ const Reserve = ({ setOpen, hotelId }) => {
     try {
       await Promise.all(
         selectedRooms.map((roomId) => {
-          const res = axios.put(`https://booking-clones.herokuapp.com/api/rooms/availability/${roomId}`, {
+          const res = axios.put(`https://bookings.onrender.com/api/rooms/availability/${roomId}`, {
             dates: alldates,
           });
           return res.data;

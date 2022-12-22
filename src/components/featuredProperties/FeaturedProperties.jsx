@@ -35,7 +35,7 @@ button{
 `
 
 const FeaturedProperties = () => {
-  const { data, loading } = useFetch("https://booking-clones.herokuapp.com/api/hotels/featured?featured=true");
+  const { data, loading } = useFetch("https://bookings.onrender.com/api/hotels/featured?featured=true");
   const breakPoints = [
     { width: 1, itemsToShow: 1 },
     { width: 500, itemsToShow: 2 },

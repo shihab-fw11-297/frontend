@@ -22,6 +22,9 @@
     margin-bottom: 50px;
   }
 
+  Link{
+    text-decoration: none;
+  }
   .headerListItem {
     display: flex;
     align-items: center;

@@ -21,8 +21,8 @@ const List = () => {
   const [max, setMax] = useState(undefined);
   const [rating, setRating] = useState(0);
 
-  const { data, loading,reFetch  } = useFetch(`https://booking-clones.herokuapp.com/api/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}&rating=${rating || 5}`);
-
+  const { data, loading,reFetch  } = useFetch(`https://bookings.onrender.com/api/hotels?city=${destination}&min=${min || 0 }&max=${max || 999}&rating=${rating || 5}`);
+   
   const handleClick = () => {
     reFetch();
   };

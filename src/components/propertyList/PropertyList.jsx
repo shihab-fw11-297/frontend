@@ -36,7 +36,7 @@ button{
 
 const PropertyList = () => {
   const { data, loading } = useFetch(
-    "https://booking-clones.herokuapp.com/api/hotels/countByType"
+    "https://bookings.onrender.com/api/hotels/countByType"
   );
 
   const images = [

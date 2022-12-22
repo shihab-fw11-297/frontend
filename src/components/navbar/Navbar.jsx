@@ -51,7 +51,7 @@ const Navbar = () => {
                             <button className={styles.firstButton}>List Your Property</button>
                             <button className={styles.navButton}><Link to="/Signup">Register</Link></button>
                             <button className={styles.navButton}><Link to="/login">Login</Link></button>
-                            <button className={styles.navButtons} ><FontAwesomeIcon icon={faCircleUser} className={styles.headerIcons2} /></button>
+                            <button className={styles.navButtons} ><Link to="/Signup"><FontAwesomeIcon icon={faCircleUser} className={styles.headerIcons2} /></Link></button>
                             <button className={styles.navButtons} ><Link to="/">  <FontAwesomeIcon icon={faBars} className={styles.headerIcons2} /> </Link></button>
                         </div>
                     )} 
