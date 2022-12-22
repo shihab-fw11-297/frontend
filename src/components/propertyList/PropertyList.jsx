@@ -18,9 +18,12 @@ button{
   background-color:#ffff;
   color:black;
   font-size:15px;
- 
-   
 }
+
+.rec-swipable{
+  gap: 1rem !important;
+}
+
 .rec.rec-arrow:disabled {
     visibility: hidden;
     color:black;

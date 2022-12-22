@@ -1,6 +1,10 @@
 import "./explore.css";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components"
+import {useDispatch} from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {newSearch} from '../../Reduxs/actions'
 
 const data = [
   {
@@ -28,10 +32,10 @@ const data = [
     location: "Madrid",
     properties: "2,906 properties",
   },
-  
+
 ]
 
-const Div  = styled.div`
+const Div = styled.div`
 width:100%;
 margin:0 auto;
 button{
@@ -46,9 +50,11 @@ button{
   background-color:#ffff;
   color:black;
   font-size:15px;
- 
-   
 }
+.rec-swipable{
+  gap: 1rem !important;
+}
+
 .rec.rec-arrow:disabled {
     visibility: hidden;
     color:black;
@@ -70,24 +76,58 @@ const PropertyList = () => {
     { width: 1200, itemsToShow: 5 }
   ];
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const today = new Date()
+  let tomorrow =  new Date()
+  tomorrow.setDate(today.getDate() + 1)
+
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: tomorrow,
+      key: "selection",
+    }
+  ]);
+
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
+
+  const setData = (destination) =>{
+    const payload= { 
+      destination:destination, 
+      date:date,
+      options:options 
+    }
+// console.log(payload)
+    dispatch(newSearch(payload));
+    navigate(`/hotels/${destination}`);
+  }
+
   return (
     <div className="pList">
       <Div>
-      <Carousel breakPoints={breakPoints}>
-        {data.map((item) => (
-          <div className="pListItem">
-            <img
-              src={item.src}
-              alt=""
-              className="pListImg"
-            />
-            <div className="pListTitles">
-              <h1>{item.location}</h1>
-              <h2>{item.properties}</h2>
+        <Carousel breakPoints={breakPoints}>
+          {data.map((item) => (
+
+            <div className="pListItem" onClick={()=> setData(item.location)}>
+             
+                <img
+                  src={item.src}
+                  alt=""
+                  className="pListImg"
+                />
+                <div className="pListTitles">
+                  <h1>{item.location}</h1>
+                  <h2>{item.properties}</h2>
+                </div>
+              
             </div>
-          </div>
-        ))}
-      </Carousel>
+          ))}
+        </Carousel>
       </Div>
     </div>
   );

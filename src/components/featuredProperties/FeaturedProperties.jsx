@@ -2,6 +2,10 @@ import "./featuredProperties.css";
 import useFetch from "../../hooks/useFetch";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components"
+import {useDispatch} from "react-redux";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import {newSearch} from '../../Reduxs/actions'
 
 const Div = styled.div`
 width:100%;
@@ -21,6 +25,10 @@ button{
  
    
 }
+.rec-swipable{
+  gap: 1rem !important;
+}
+
 .rec.rec-arrow:disabled {
     visibility: hidden;
     color:black;
@@ -43,6 +51,36 @@ const FeaturedProperties = () => {
     { width: 1200, itemsToShow: 5 }
   ];
 
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const today = new Date()
+  let tomorrow =  new Date()
+  tomorrow.setDate(today.getDate() + 1)
+
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: tomorrow,
+      key: "selection",
+    }
+  ]);
+
+  const [options, setOptions] = useState({
+    adult: 1,
+    children: 0,
+    room: 1,
+  });
+
+  const getDetail = (hotelId, city) =>{
+    const payload= { 
+      destination:city, 
+      date:date,
+      options:options 
+    }
+// console.log(payload)
+    dispatch(newSearch(payload));
+    navigate(`/hotel/${hotelId}`);
+  }
 
   return (
     <div className="fp">
@@ -53,7 +91,7 @@ const FeaturedProperties = () => {
           <>
             <Carousel breakPoints={breakPoints}>
               {data.map((item) => (
-                <div className="fpItem" key={item._id}>
+                <div className="fpItem" key={item._id} onClick={()=> getDetail(item._id,item.city)}>
                   <img
                     src={item.photos[0]}
                     alt=""
