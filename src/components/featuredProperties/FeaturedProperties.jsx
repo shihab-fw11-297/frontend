@@ -2,10 +2,11 @@ import "./featuredProperties.css";
 import useFetch from "../../hooks/useFetch";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components"
-import {useDispatch} from "react-redux";
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {newSearch} from '../../Reduxs/actions'
+import {useDispatch} from "react-redux";
+import { useState } from "react";
+import Loading from '../Loading/Loading';
 
 const Div = styled.div`
 width:100%;
@@ -16,6 +17,11 @@ button{
     
     border:0;
 }
+
+.rec-swipable{
+  gap:1rem !important;
+}
+
 .rec.rec-arrow {
     border-radius: 50%;
    
@@ -25,10 +31,6 @@ button{
  
    
 }
-.rec-swipable{
-  gap: 1rem !important;
-}
-
 .rec.rec-arrow:disabled {
     visibility: hidden;
     color:black;
@@ -51,19 +53,9 @@ const FeaturedProperties = () => {
     { width: 1200, itemsToShow: 5 }
   ];
 
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const today = new Date()
-  let tomorrow =  new Date()
-  tomorrow.setDate(today.getDate() + 1)
-
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: tomorrow,
-      key: "selection",
-    }
-  ]);
 
   const [options, setOptions] = useState({
     adult: 1,
@@ -71,27 +63,39 @@ const FeaturedProperties = () => {
     room: 1,
   });
 
-  const getDetail = (hotelId, city) =>{
+  const today = new Date()
+let tomorrow =  new Date()
+tomorrow.setDate(today.getDate() + 1)
+
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: tomorrow,
+      key: "selection",
+    }
+    ,
+  ]);
+
+  const getData = (id,location) =>{
     const payload= { 
-      destination:city, 
+      destination:location,
       date:date,
       options:options 
     }
-// console.log(payload)
     dispatch(newSearch(payload));
-    navigate(`/hotel/${hotelId}`);
+    navigate(`/hotel/${id}`);
   }
 
   return (
     <div className="fp">
       <Div>
         {loading ? (
-          "Loading"
+          <Loading />
         ) : (
           <>
             <Carousel breakPoints={breakPoints}>
               {data.map((item) => (
-                <div className="fpItem" key={item._id} onClick={()=> getDetail(item._id,item.city)}>
+                <div className="fpItem" key={item._id} onClick={()=> getData(item._id,item.city)}>
                   <img
                     src={item.photos[0]}
                     alt=""

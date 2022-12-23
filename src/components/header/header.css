@@ -1,0 +1,253 @@
+.header {
+    background-color: #003580;
+    color: white;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .headerContainer {
+    width: 100%;
+    max-width: 1024px;
+    margin: 20px 0px 80px 0px;
+  }
+
+  .headerContainer.listMode {
+    margin: 20px 0px 0px 0px;
+  }
+  
+  .headerList {
+    display: flex;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+
+  Link{
+    text-decoration: none;
+  }
+  .headerListItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .headerListItem.active {
+    border: 1px solid white;
+    padding: 10px;
+    border-radius: 20px;
+  }
+
+  .headerDesc {
+    margin: 20px 0px;
+  }
+
+  .headerBtn {
+    background-color: #0071c2;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+  }
+
+  .headerBtn:hover{
+    background-color: #504646;
+    color: white;
+  }
+
+  .headerBtn2 {
+    background-color: #0071c2;
+    color: white;
+    font-weight: 600;
+    font-size: 15px;
+    border: none;
+    padding: 10px 30px;
+    cursor: pointer;
+  }
+
+  .headerBtn2:hover{
+    background-color: #504646;
+    color: white;
+  }
+
+  .headerSearch {
+    height: 30px;
+    background-color: white;
+    border: 3px solid #febb02;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 10px 0px;
+    border-radius: 5px;
+    position: absolute;
+    bottom: -25px;
+    width: 100%;
+    max-width: 1024px;
+  }
+  
+  .headerIcon {
+    color: darkgray;
+  }
+
+  .headerSearchItem {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .headerSearchInput {
+    font-weight: 550;
+    border: none;
+    outline: none;
+  }
+  
+  .headerSearchText {
+    color: darkgray;
+    cursor: pointer;
+    font-weight: 550;
+    font-size: 14px;
+  }
+
+  .date {
+    position: absolute;
+    top: 50px;
+    z-index: 2;
+  }
+
+  .options {
+    z-index: 2;
+    position: absolute;
+    top: 50px;
+    background-color: white;
+    color: gray;
+    font-weight: 550;
+    border-radius: 5px;
+    -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+    box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+  }
+
+  .optionItem {
+    width: 200px;
+    display: flex;
+    justify-content: space-between;
+    margin: 10px;
+    font-size: 14px;
+  }
+  
+  .optionCounter {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 12px;
+    color: black;
+    font-weight: 550;
+  }
+  
+  .optionCounterButton {
+    width: 30px;
+    height: 30px;
+    border: 1px solid #0071c2;
+    color: #0071c2;
+    cursor: pointer;
+    background-color: white;
+  }
+  
+  .optionCounterButton:disabled {
+    cursor: not-allowed;
+  }
+
+
+  @media screen and (max-width: 767px) {
+    .header {
+      background-color: #003580;
+    }
+
+    .headerContainer {
+      width: 100%;
+      max-width: 1024px;
+      margin: 20px 0px 80px 0px;
+      padding: 20px;
+    }
+    
+    .headerList{
+      display: none;
+    }
+
+    .headerList {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      margin-bottom: 50px;
+    }
+
+    .headerTitle{
+      font-size: 25px;
+    }
+
+    .headerSearch {
+      height: fit-content;
+      background-color: white;
+      border: 3px solid #febb02;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-left: 1px;
+      margin-right: 20px;
+      padding: 0px;
+      border-radius: 5px;
+      position: absolute;
+      bottom: -170px;
+      max-width: 90%;
+    }
+
+    .headerSearchItem {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 3px solid #febb02;
+      width: 99%;
+      height: 50px;
+    }
+
+    .manage:nth-child(1) {
+      padding-left: 24%;
+    }
+    .headerSearchInput {
+      font-weight: 550;
+      border: none;
+      outline: none;
+      width:300px;
+
+    }
+
+    .headerSearchText {
+      color: darkgray;
+      cursor: pointer;
+      font-weight: 550;
+      font-size: 15px;
+    }
+
+    .headerBtn2{
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+    .date {
+      position: absolute;
+      top: 100px;
+      z-index: 2;
+    }
+    .options {
+      z-index: 2;
+      position: absolute;
+      top: 155px;
+      background-color: white;
+      color: gray;
+      font-weight: 550;
+      border-radius: 5px;
+      -webkit-box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+      box-shadow: 0px 0px 10px -5px rgba(0, 0, 0, 0.4);
+    }
+  
+  }

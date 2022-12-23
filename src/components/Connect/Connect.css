@@ -1,0 +1,46 @@
+.FlexDiv{
+    width: 100%;
+    max-width: 1024px;
+    display: flex;
+}
+
+
+.InfoDiv{
+    width: 263px;
+    min-height: 150px;
+}
+
+.InfoDiv > img{
+    display: block;
+    width: 90%;
+    height: 230px;
+    object-fit:cover;
+    margin-bottom:16px;
+}
+
+.InfoDiv > h2, p{
+    margin: 0;
+}
+
+
+.InfoDiv > h2{
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    color: rgb(51,51,51)
+}
+.InfoDiv > p{
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    color:rgb(107, 107,107)  
+}
+
+@media screen and (max-width: 767px) {
+    .FlexDiv{
+        display: none;
+    }
+    .homeTitles{
+        display: none;
+    }
+}

@@ -2,6 +2,7 @@ import "./propertyList.css";
 import useFetch from "../../hooks/useFetch";
 import Carousel from "react-elastic-carousel";
 import styled from "styled-components"
+import Loading from '../Loading/Loading';
 
 const Div = styled.div`
 width:100%;
@@ -18,10 +19,12 @@ button{
   background-color:#ffff;
   color:black;
   font-size:15px;
+ 
+   
 }
 
 .rec-swipable{
-  gap: 1rem !important;
+  gap:1rem !important;
 }
 
 .rec.rec-arrow:disabled {
@@ -62,9 +65,10 @@ const PropertyList = () => {
       <Div>
         {/*  */}
           {loading ? (
-            "loading"
+            <Loading />
           ) : (
             <>
+            
             <Carousel breakPoints={breakPoints}>
               {data &&
                 images.map((img, i) => (
